@@ -1,0 +1,6 @@
+{
+  "name": "Worksheet on Riak",
+  "tagline": "DATA 210 - Spring 2016",
+  "body": "# Installation\r\n1. wget https://packagecloud.io/basho/riak/packages/ubuntu/trusty/riak_2.1.1-1_amd64.deb/download -o riak_2.1.1-1_amd64.deb\r\n2. sudo apt-get update\r\n3. sudo dpkg -i riak_2.1.1-1_amd64.deb\r\n\r\n# Starting Riak\r\n1. Edit /etc/riak/riak.conf changing the line that says listener.http.internal = 127.0.0.1:8098 to listener.http.internal = 0.0.0.0:8098.\r\n2. sudo riak start # This start riak running on port 8098.\r\n3. Set up port forwarding in Virtualbox for port 8098 to 8098 just like we did for Jupyterhub, which is under Settings->Networking-Port Forwarding.\r\n\r\n# Questions\r\n1. Create a webpage in Riak in a bucket called test with a key called data210. Set the MIME type to text/html and set the content to a webpage that says Welcome to DATA 210. I love Riak. Once this is done, go to your browser and navigate to http://localhost:8098/test/data210. What do you see?",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

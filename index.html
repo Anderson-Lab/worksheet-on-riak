@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Worksheet on Riak by Anderson-Lab</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Worksheet on Riak</h1>
+        <p>DATA 210 - Spring 2016</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/Anderson-Lab/worksheet-on-riak" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/Anderson-Lab/worksheet-on-riak/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/Anderson-Lab/worksheet-on-riak/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
+
+<ol>
+<li>wget <a href="https://packagecloud.io/basho/riak/packages/ubuntu/trusty/riak_2.1.1-1_amd64.deb/download">https://packagecloud.io/basho/riak/packages/ubuntu/trusty/riak_2.1.1-1_amd64.deb/download</a> -o riak_2.1.1-1_amd64.deb</li>
+<li>sudo apt-get update</li>
+<li>sudo dpkg -i riak_2.1.1-1_amd64.deb</li>
+</ol>
+
+<h1>
+<a id="starting-riak" class="anchor" href="#starting-riak" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Starting Riak</h1>
+
+<ol>
+<li>Edit /etc/riak/riak.conf changing the line that says listener.http.internal = 127.0.0.1:8098 to listener.http.internal = 0.0.0.0:8098.</li>
+<li>sudo riak start # This start riak running on port 8098.</li>
+<li>Set up port forwarding in Virtualbox for port 8098 to 8098 just like we did for Jupyterhub, which is under Settings-&gt;Networking-Port Forwarding.</li>
+</ol>
+
+<h1>
+<a id="questions" class="anchor" href="#questions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Questions</h1>
+
+<ol>
+<li>Create a webpage in Riak in a bucket called test with a key called data210. Set the MIME type to text/html and set the content to a webpage that says Welcome to DATA 210. I love Riak. Once this is done, go to your browser and navigate to http://localhost:8098/test/data210. What do you see?</li>
+</ol>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/Anderson-Lab">Anderson-Lab</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
