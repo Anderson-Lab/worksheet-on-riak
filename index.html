@@ -65,8 +65,73 @@
 <li><p>Now create a bucket that contains information about the Anderson family doggies. Use the example we went over in class to store each dog by their name in the same bucket. There are three dogs named Layla, Armani, and Orion. They are a "rhodesian ridgeback", "catahoula", and a "great dane/shepherd mix", respectively. Use JSON to store the type of dog and the age which is Layla is 3 years, Armani is 2 years, and Orion is 6 years old. Once you store them, make sure you can GET the value of each key you created.</p></li>
 <li><p>Now create a new key/value relationship called cage 1, and assign Layla to that cage using a link.</p></li>
 <li><p>Now go into your browser and GET the information for Orion.</p></li>
-<li>
+<li><p>Now go ahead and delete orion from the database.</p></li>
 </ol>
+
+<h1>
+<a id="map-reduce" class="anchor" href="#map-reduce" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Map-reduce</h1>
+
+<p>Now create the following database, and execute the following map-reduce command. What does this map reduce command do? Why do we need to do this? Why would this sometimes be good and sometimes be bad?</p>
+
+<pre><code>curl -XPUT -H "content-type: text/plain" \
+    http://localhost:8098/riak/alice/p1 --data-binary @-&lt;&lt;\EOF
+Alice was beginning to get very tired of sitting by her sister on the
+bank, and of having nothing to do: once or twice she had peeped into the
+book her sister was reading, but it had no pictures or conversations in
+it, 'and what is the use of a book,' thought Alice 'without pictures or
+conversation?'
+EOF
+
+curl -XPUT -H "content-type: text/plain" \
+    http://localhost:8098/riak/alice/p2 --data-binary @-&lt;&lt;\EOF
+So she was considering in her own mind (as well as she could, for the
+hot day made her feel very sleepy and stupid), whether the pleasure
+of making a daisy-chain would be worth the trouble of getting up and
+picking the daisies, when suddenly a White Rabbit with pink eyes ran
+close by her.
+EOF
+
+curl -XPUT -H "content-type: text/plain" \
+    http://localhost:8098/riak/alice/p5 --data-binary @-&lt;&lt;\EOF
+The rabbit-hole went straight on like a tunnel for some way, and then
+dipped suddenly down, so suddenly that Alice had not a moment to think
+about stopping herself before she found herself falling down a very deep
+well.
+EOF
+</code></pre>
+
+<p>Now you can do the word count example using Riak:</p>
+
+<pre><code>curl -X POST -H "content-type: application/json" \
+    http://localhost:8098/mapred --data @-&lt;&lt;\EOF
+{"inputs":[["alice","p1"],["alice","p2"],["alice","p5"]]
+,"query":[{"map":{"language":"javascript","source":"
+function(v) {
+  var m = v.values[0].data.toLowerCase().match(/\w*/g);
+  var r = [];
+  for(var i in m) {
+    if(m[i] != '') {
+      var o = {};
+      o[m[i]] = 1;
+      r.push(o);
+    }
+  }
+  return r;
+}
+"}},{"reduce":{"language":"javascript","source":"
+function(v) {
+  var r = {};
+  for(var i in v) {
+    for(var w in v[i]) {
+      if(w in r) r[w] += v[i][w];
+      else r[w] = v[i][w];
+    }
+  }
+  return [r];
+}
+"}}]}
+EOF
+</code></pre>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/Anderson-Lab">Anderson-Lab</a></p>
