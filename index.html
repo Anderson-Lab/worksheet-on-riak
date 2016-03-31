@@ -52,7 +52,7 @@
 <a id="starting-riak" class="anchor" href="#starting-riak" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Starting Riak</h1>
 
 <ol>
-<li>Edit /etc/riak/riak.conf changing the line that says listener.http.internal = 127.0.0.1:8098 to listener.http.internal = 0.0.0.0:8098.</li>
+<li>Edit /etc/riak/riak.conf changing the line that says listener.http.internal = 127.0.0.1:8098 to listener.http.internal = 0.0.0.0:8098. (e.g., nano /etc/riak/riak.conf)</li>
 <li>sudo riak start # This start riak running on port 8098.</li>
 <li>Set up port forwarding in Virtualbox for port 8098 to 8098 just like we did for Jupyterhub, which is under Settings-&gt;Networking-Port Forwarding.</li>
 </ol>
